@@ -13,23 +13,27 @@ class Solution(object):
         # nums1.sort()
 
         ### Version 2 ###
-        i, j = 0, 0
-        flag = True
-        while i < m or j < n:
-            # 后面下标数字大于前面的 我们要让i++  注意碰壁
-            while nums1[i] < nums2[j]:
-                i += 1
-                if i == m + j:# 碰壁了 直接后边插入
-                    nums1[i:] = nums2[j:]
-                    flag = False
+        pos = m + n -1
 
-            # 到这里说明要执行插入
-            front = nums1[i]
-            while nums2[j] < front and j < n and flag:
-                nums1.insert(i, nums2[j])
-                nums1.pop()
-                j += 1
-                i += 1
+        # 当有一个数组已经被处理完毕
+        while m>0 and n>0 :
+            # 前面大于后面
+            if nums1[m-1] > nums2[n-1]:
+                nums1[pos] = nums1[m-1]
+                m -= 1
+            else:
+                nums1[pos] = nums2[n-1]
+                n -= 1
+            pos -= 1
+        # 如果nums1 没有完毕 -》 直接当作正确输出
+        # 如果nums2 没有完毕
+        nums1[:n] = nums2[:n]
 
+
+
+nums1 = [1,2,3,0,0,0]
+m = 3
+nums2 = [2,5,6]
+n = 3
 s = Solution()
-s.merge([1,4,5,0,0,0,0,0,0,0], 3, [0,2,2,3,7,8,9],7)
+s.merge(nums1, m, nums2, n)
