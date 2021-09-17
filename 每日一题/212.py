@@ -1,11 +1,13 @@
 # 思路清晰
+from collections import defaultdict
 
-board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]]
-words = ["oath","pea","eat","rain"]
+board = [["o","a","b","n"],["o","t","a","e"],["a","h","k","r"],["a","f","l","v"]]
+words = ["oa","oaa"]
 
 w, h = len(board[0]), len(board)
 
 eles = [ch for word in board for ch in word]
+res = set()
 
 # 每个元素需要存放相邻元素的信息(或者位置)
 
@@ -22,17 +24,30 @@ def get_neighbor(pos):
     return neighs
 
 # 单词的开头 我们需要用字典存放(方便找到开头)
-from collections import defaultdict
 
-start_word_dic = defaultdict(list)
+char_pos_dic = defaultdict(list)
 for i, ch in enumerate(eles):
-    start_word_dic[ch].append(i)
-
-# 每个用过的单词我们需要用标记来确定他不再被复用
-book = [0 for i in eles]
+    char_pos_dic[ch].append(i)
 
 
-# 查找单词的过程应该是个dfs的过程
 
-def dfs(word):
+def dfs(word_to_pos, now, next):
+    if next == len(word_to_pos):
+        print('匹配成功')
     
+
+
+# example 
+
+
+for word in words:
+    word_to_pos = []
+    for char in word:
+        if char in char_pos_dic:
+            word_to_pos.append(char_pos_dic[char])
+        else:
+            break
+    
+    if len(word_to_pos) == len(word): # 所有单词都有哦
+        
+        while 
