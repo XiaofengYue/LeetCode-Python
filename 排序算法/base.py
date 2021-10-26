@@ -69,3 +69,24 @@ def bubble_sort(n):
                 temp = nums[j]
                 nums[j] = nums[j-1]
                 nums[j-1] = temp
+
+# 堆排序
+def shift_down(arr, root, k):
+    val = arr[root]
+    while root<<1 < k:
+        child = root << 1
+        if child|1 < k and arr[child|1][1] < arr[child][1]: # 有右孩子并且右孩子小于左孩子
+            child |= 1 # 孩子变为右孩子
+        if arr[child][1] < val[1]:
+            arr[root] = arr[child]
+            root = child
+        else:
+            break
+    arr[root] = val
+
+def shift_up(arr, child):
+    val = arr[child]
+    while child>>1 >0 and val[1] < arr[child>>1][1]:
+        arr[child] = arr[child>>1]
+        child >>= 1
+    arr[child] = val
