@@ -16,5 +16,6 @@ class Solution(object):
                 return i
             i+=1
 
+# 好题当赏
 s = Solution()
 s.poorPigs(1, 1, 1)
